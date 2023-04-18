@@ -37,6 +37,13 @@ export default function ({ command, mode }: ConfigEnv): UserConfig {
     server: {
       host: true,
       hmr: true,
+      proxy: {
+        '/cwe': {
+          target: 'http://112.74.188.176',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/cwe/, ''),
+        },
+      },
     },
     plugins: createVitePlugins(viteEnv, isProduction),
     build: {

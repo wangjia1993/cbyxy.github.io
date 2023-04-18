@@ -5,6 +5,10 @@ import router from '/@/router';
 import store from '/@/store';
 import './assets/font/iconfont.css';
 import './assets/app.css';
+import 'xe-utils';
+import VXETable from 'vxe-table';
+import 'vxe-table/lib/style.css';
+// import oView from "oview";
 
 const app = createApp(App);
 
@@ -16,5 +20,9 @@ app.use(i18n);
 
 // 状态管理
 app.use(store);
+
+// VXETable
+app.use(VXETable);
+// app.use(oView);
 
 app.mount('#app');

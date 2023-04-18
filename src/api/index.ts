@@ -5,8 +5,9 @@ import useAxiosApi from '/@/utils/useAxiosApi';
  * @returns UseAxiosReturn
  */
 export function loginPassword() {
-  return useAxiosApi(`/api/login`, {
-    method: 'POST',
-    data: { name: '123' },
+  return useAxiosApi(`/cwe/queryCwePie/0/2023-3-20`, {
+    method: 'GET',
+    data: {},
+    paramas: {},
   });
 }

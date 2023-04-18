@@ -4,7 +4,7 @@ export const lang: langType = {
   title: 'VUE H5开发模板',
   tabbar: {
     home: '首页',
-    list: '列表',
+    list: '能耗数据中心',
     member: '我的',
     demo: '示例',
   },

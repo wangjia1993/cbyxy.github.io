@@ -8,12 +8,13 @@
     </RouterView>
     <RouterView v-if="!$route.meta.keepAlive" :key="$route.path" />
   </div>
-  <nut-tabbar unactive-color="#364636" active-color="#1989fa" bottom v-model="activeTab" v-show="tabbarVisible" @tab-switch="tabSwitch">
+  <!-- <nut-tabbar unactive-color="#364636" active-color="#1989fa" bottom v-model="activeTab" v-show="tabbarVisible" @tab-switch="tabSwitch">
     <nut-tabbar-item v-for="item in tabItem" :key="item.key" :tab-title="$t(`tabbar.${item.key}`)" :icon="item.icon" />
-  </nut-tabbar>
+  </nut-tabbar> -->
 </template>
 
 <script lang="ts" setup name="BasicLayoutPage">
+  import { ref, watch } from 'vue';
   import { useRouter } from 'vue-router';
   import { Home, Horizontal, My, Location } from '@nutui/icons-vue';
 
@@ -43,23 +44,23 @@
     { deep: true, immediate: true },
   );
 
-  const tabSwitch = (_item, index) => {
-    switch (index) {
-      case 0:
-        router.push('/home');
-        break;
-      case 1:
-        router.push('/list');
-        break;
-      case 2:
-        router.push('/member');
-        break;
-      case 3:
-        router.push('/demo');
-        break;
-    }
-    activeTab.value = index;
-  };
+  // const tabSwitch = (_item, index) => {
+  //   switch (index) {
+  //     case 0:
+  //       router.push('/home');
+  //       break;
+  //     case 1:
+  //       router.push('/list');
+  //       break;
+  //     case 2:
+  //       router.push('/member');
+  //       break;
+  //     case 3:
+  //       router.push('/demo');
+  //       break;
+  //   }
+  //   activeTab.value = index;
+  // };
 
   const goBack = () => {
     router.go(-1);

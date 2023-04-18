@@ -1,4 +1,4 @@
-import { useAxios } from '@vueuse/integrations/useAxios';
+// import { useAxios } from '@vueuse/integrations/useAxios';
 import axios from 'axios';
 import { showToast } from 'vant';
 import 'vant/es/toast/style';
@@ -12,6 +12,8 @@ const instance = axios.create({
 // request interceptor
 instance.interceptors.request.use(
   (config) => {
+    console.log('config', config);
+    config.url = `http://112.74.188.176:8080/${config.url}`;
     // do something before request is sent
     // const token = store.state.user.token;
 
@@ -44,18 +46,18 @@ instance.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   (response) => {
-    const res = response.data;
+    return response.data;
     // if the custom code is not 200, it is judged as an error.
-    if (res.code !== 200) {
-      showToast(res.msg);
-      // 412: Token expired;
-      if (res.code === 412) {
-        // store.dispatch('user/userLogout');
-      }
-      return Promise.reject(res.msg || 'Error');
-    } else {
-      return res;
-    }
+    // if (res.code !== 200) {
+    //   showToast(res.msg);
+    //   // 412: Token expired;
+    //   if (res.code === 412) {
+    //     // store.dispatch('user/userLogout');
+    //   }
+    //   return Promise.reject(res.msg || 'Error');
+    // } else {
+    //   return res;
+    // }
   },
   (error) => {
     console.log('err' + error);
@@ -69,5 +71,5 @@ instance.interceptors.response.use(
  */
 
 export default function useAxiosApi(url: string, config: any) {
-  return useAxios(url, config);
+  return instance(url, config);
 }

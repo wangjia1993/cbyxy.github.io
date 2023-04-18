@@ -1,7 +1,7 @@
 export const routes = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/list',
     component: () => import('/@/layout/basic/index.vue'),
     children: [
       {
