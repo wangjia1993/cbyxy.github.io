@@ -1,6 +1,6 @@
 <template>
   <div class="pie">
-    <canvas id="myChart2" :width="domWidth" height="600"></canvas>
+    <canvas id="myChart2" :width="domWidth" height="300"></canvas>
   </div>
 </template>
 
@@ -9,63 +9,87 @@
   import { defineExpose, ref } from 'vue';
   const domWidth = ref(window.innerWidth - 30);
 
-  const initChart = (datas) => {
+  const initChart = (data_w, data_e, data_c) => {
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('myChart2'));
     // 绘制图表
     myChart.setOption({
-      title: {
-        text: '用能占比',
-        left: 'center',
-        textStyle: {
-          color: '#333',
-          fontWeight: 'bold',
-          fontSize: 18,
-        },
+      legend: {
+        top: '0',
+        bottom: '10%',
+        right: '0',
       },
-      series: datas.map(function (data, idx) {
-        var top = idx * 33.3;
-        return {
+      title: [
+        {
+          text: '用能占比',
+          left: '0',
+        },
+        {
+          subtext: '水',
+          left: '16.67%',
+          top: '75%',
+          textAlign: 'center',
+        },
+        {
+          subtext: '电',
+          left: '50%',
+          top: '75%',
+          textAlign: 'center',
+        },
+        {
+          subtext: '煤',
+          left: '83.33%',
+          top: '75%',
+          textAlign: 'center',
+        },
+      ],
+      series: [
+        {
           type: 'pie',
-          radius: [20, 60],
-          top: top + '%',
-          height: '33.33%',
-          left: 'center',
-          width: 400,
-          itemStyle: {
-            borderColor: '#fff',
-            borderWidth: 1,
-          },
+          radius: '90%',
+          center: ['50%', '50%'],
+          data: data_w,
           label: {
-            alignTo: 'edge',
-            formatter: '{name|{b}}\n{time|{c} 小时}',
-            minMargin: 5,
-            edgeDistance: 10,
-            lineHeight: 15,
-            rich: {
-              time: {
-                fontSize: 10,
-                color: '#999',
-              },
-            },
+            position: 'inner',
+            fontSize: 12,
+            formatter: '{c}',
           },
-          labelLine: {
-            length: 15,
-            length2: 0,
-            maxSurfaceAngle: 80,
+          left: 0,
+          right: '66.6667%',
+          top: 0,
+          bottom: 0,
+        },
+        {
+          type: 'pie',
+          radius: '90%',
+          center: ['50%', '50%'],
+          data: data_e,
+          label: {
+            position: 'inner',
+            fontSize: 12,
+            formatter: '{c}',
           },
-          labelLayout: function (params) {
-            const isLeft = params.labelRect.x < myChart.getWidth() / 2;
-            const points = params.labelLinePoints;
-            // Update the end point.
-            points[2][0] = isLeft ? params.labelRect.x : params.labelRect.x + params.labelRect.width;
-            return {
-              labelLinePoints: points,
-            };
+          left: '33.3333%',
+          right: '33.3333%',
+          top: 0,
+          bottom: 0,
+        },
+        {
+          type: 'pie',
+          radius: '90%',
+          center: ['50%', '50%'],
+          data: data_c,
+          label: {
+            position: 'inner',
+            fontSize: 12,
+            formatter: '{c}',
           },
-          data: data,
-        };
-      }),
+          left: '66.6667%',
+          right: 0,
+          top: 0,
+          bottom: 0,
+        },
+      ],
     });
   };
 

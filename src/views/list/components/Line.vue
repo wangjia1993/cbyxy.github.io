@@ -17,13 +17,14 @@
       title: {
         text: '用能分析',
       },
-      tooltip: {
-        trigger: 'axis',
-      },
       legend: {
         data: ['水', '电', '煤'],
         right: 0,
       },
+      tooltip: {
+        trigger: 'axis',
+      },
+
       grid: {
         left: '0%',
         right: '1%',

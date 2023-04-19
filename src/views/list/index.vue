@@ -145,24 +145,26 @@
     const time = currentDate.value.join('-');
     pieData.value = await queryCwePie(campus, time);
 
-    const datas = [[], [], []];
+    let datas_w = [];
+    let datas_e = [];
+    let datas_c = [];
 
     pieData.value.forEach((item) => {
       const { type, businessData, liveData, teachData } = item;
       if (type === 'w') {
-        datas[0] = [
+        datas_w = [
           { name: '教学区域', value: teachData },
           { name: '生活区域', value: liveData },
           { name: '商业区域', value: businessData },
         ];
       } else if (type === 'e') {
-        datas[1] = [
+        datas_e = [
           { name: '教学区域', value: teachData },
           { name: '生活区域', value: liveData },
           { name: '商业区域', value: businessData },
         ];
       } else {
-        datas[2] = [
+        datas_c = [
           { name: '教学区域', value: teachData },
           { name: '生活区域', value: liveData },
           { name: '商业区域', value: businessData },
@@ -170,7 +172,7 @@
       }
     });
 
-    pieRef.value.initChart(datas);
+    pieRef.value.initChart(datas_w, datas_e, datas_c);
   };
 
   watch(
@@ -228,6 +230,6 @@
     margin-top: 50px;
   }
   .wrap {
-    padding-bottom: 50px;
+    // padding-bottom: 0px;
   }
 </style>
